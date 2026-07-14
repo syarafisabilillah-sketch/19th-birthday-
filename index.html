@@ -259,7 +259,7 @@ max-width:800px;">
 `;
 
 }
-}
+
 function showLetter(){
 
 document.getElementById("popup").innerHTML=`
@@ -323,7 +323,43 @@ Happy birthday, sayang. Makasih udah lahir dan jadi bagian dari ceritaku. ✨
 }
 
 function closePopup(){
+function showCake(){
 
+document.getElementById("popup").innerHTML=`
+
+<div style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:999;
+">
+
+<div class="card" style="text-align:center;">
+
+<div style="font-size:100px;">🎂</div>
+
+<h2>Selamat ulang tahun sayang ❤️</h2>
+
+<p>
+Selamat ulang tahun sayang dan selamat udah jadi om om 🤭
+</p>
+
+<button onclick="closePopup()">Tutup</button>
+
+</div>
+
+</div>
+
+`;
+
+}
 document.getElementById("popup").innerHTML="";
 
   }
