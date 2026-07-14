@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday 🤍</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#dceeff,#ffddeb,#f5e5d2,#ffffff);
+background-size:400% 400%;
+animation:bgMove 15s ease infinite;
+overflow-x:hidden;
+color:#5b4b4b;
+}
+
+@keyframes bgMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.page{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:25px;
+text-align:center;
+}
+
+.hidden{
+display:none;
+}
+
+.card{
+background:rgba(255,255,255,.8);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:25px;
+width:90%;
+max-width:380px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+h1{
+font-size:32px;
+margin-bottom:15px;
+color:#6f89c9;
+}
+
+p{
+line-height:1.7;
+}
+
+button{
+margin-top:20px;
+padding:14px 28px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+background:#8db7ff;
+color:white;
+font-size:16px;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+background:#739de7;
+}
+
+input{
+margin-top:20px;
+width:100%;
+padding:14px;
+border-radius:15px;
+border:none;
+outline:none;
+font-size:17px;
+text-align:center;
+background:white;
+}
+
+#error{
+margin-top:12px;
+color:#ff5f7d;
+font-size:14px;
+}
+
+.fade{
+animation:fade .6s;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@media(max-width:480px){
+
+h1{
+font-size:28px;
+}
+
+.card{
+padding:25px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="intro" class="page fade">
+
+<div class="card">
+
+<h1>Hadiah Dari Bidadari 🤍</h1>
+
+<p>
+Haiii sayang...
+Aku punya hadiah kecil buat kamu.
+Semoga kamu suka yaa. ✨
+</p>
+
+<button onclick="nextPage()">
+Buka Hadiah
+</button>
+
+</div>
+
+</div>
+
+<div id="passwordPage" class="page hidden fade">
+
+<div class="card">
+
+<h2>Masukkan Password 🔐</h2>
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button onclick="checkPassword()">
+Masuk
+</button>
+
+<div id="error"></div>
+
+</div>
+
+</div>
+
+<div id="giftPage" class="page hidden fade">
+
+<div class="card">
+
+<h1>🎁</h1>
+
+<p>
+Password benar!
+Klik kotak hadiah di bawah ini yaa 🤍
+</p>
+
+<button onclick="openGift()">
+Buka Kotak Hadiah
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function nextPage(){
+
+document.getElementById("intro").classList.add("hidden");
+
+document.getElementById("passwordPage").classList.remove("hidden");
+
+}
+
+function checkPassword(){
+
+const pass=document.getElementById("password").value;
+
+if(pass==="09012007"){
+
+document.getElementById("passwordPage").classList.add("hidden");
+
+document.getElementById("giftPage").classList.remove("hidden");
+
+}else{
+
+document.getElementById("error").innerHTML="Password salah 🤍";
+
+}
+
+}
+
+function openGift(){
+
+document.getElementById("giftPage").innerHTML=`
+
+<h2 style="margin-bottom:25px;color:#6f89c9;">
+Pilih Hadiah Untuk Dibuka 💖
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+width:100%;
+max-width:800px;">
+
+<div class="card">
+<div style="font-size:60px;">💌</div>
+<h3>Surat</h3>
+<button onclick="showLetter()">Buka</button>
+</div>
+
+<div class="card">
+<div style="font-size:60px;">🎵</div>
+<h3>Daylight</h3>
+<a href="https://open.spotify.com/search/daylight%20taylor%20swift" target="_blank">
+<button>Dengerin Lagu</button>
+</a>
+</div>
+
+<div class="card">
+<div style="font-size:60px;">🎂</div>
+<h3>Kue</h3>
+<button onclick="showCake()">Lihat</button>
+</div>
+
+</div>
+
+<div id="popup"></div>
+
+`;
+
+}
+}
+function showLetter(){
+
+document.getElementById("popup").innerHTML=`
+
+<div style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:999;
+">
+
+<div class="card" style="
+max-width:700px;
+max-height:80vh;
+overflow:auto;
+text-align:left;
+">
+
+<h2 style="text-align:center;">💌 Untuk Kamu</h2>
+
+<p style="margin-top:20px;line-height:2;">
+
+Selamat ulang tahun ya, kamu. 🤍
+<br><br>
+
+Jangan kaget dulu, iya ini aku yang biasanya nyebelin, suka gangguin, dan sok tengil tiba-tiba bikin beginian wkwk.
+
+<br><br>
+
+Tapi di balik semua bercandaan itu, aku beneran bersyukur kamu ada. Terima kasih udah jadi seseorang yang nemenin hari-hariku, yang bikin hal sederhana jadi punya cerita.
+
+<br><br>
+
+Di umur kamu yang baru ini, aku cuma berharap semoga hidup lebih baik sama kamu. Semoga kamu selalu dikelilingi hal-hal baik, dilancarkan semua yang kamu usahakan, dan tetap jadi kamu yang aku kenal.
+
+<br><br>
+
+Kalau nanti hari-hari terasa berat, semoga kamu ingat kalau ada seseorang yang selalu percaya sama kamu.
+
+<br><br>
+
+Happy birthday, sayang. Makasih udah lahir dan jadi bagian dari ceritaku. ✨
+
+</p>
+
+<button onclick="closePopup()">Tutup</button>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+function closePopup(){
+
+document.getElementById("popup").innerHTML="";
+
+  }
+</script>
+
+</body>
+</html>
