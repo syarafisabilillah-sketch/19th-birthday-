@@ -3,125 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hadiah Dari Bidadari 🤍</title>
 
-<title>Happy Birthday 🤍</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
 
 body{
-background:linear-gradient(135deg,#dceeff,#ffddeb,#f5e5d2,#ffffff);
+background:linear-gradient(135deg,#dceeff,#ffd8ea,#fff,#f5e3d3);
 background-size:400% 400%;
-animation:bgMove 15s ease infinite;
-overflow-x:hidden;
-color:#5b4b4b;
+animation:bg 15s ease infinite;
+overflow:hidden;
 }
 
-@keyframes bgMove{
+@keyframes bg{
 0%{background-position:0% 50%;}
 50%{background-position:100% 50%;}
 100%{background-position:0% 50%;}
 }
 
 .page{
-min-height:100vh;
+width:100%;
+height:100vh;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
-padding:25px;
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:390px;
+background:rgba(255,255,255,.86);
+backdrop-filter:blur(15px);
+padding:30px;
+border-radius:25px;
 text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.12);
+animation:fade .8s;
+}
+
+@keyframes fade{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 .hidden{
 display:none;
 }
 
-.card{
-background:rgba(255,255,255,.8);
-backdrop-filter:blur(12px);
-padding:30px;
-border-radius:25px;
-width:90%;
-max-width:380px;
-box-shadow:0 10px 30px rgba(0,0,0,.15);
-}
-
 h1{
-font-size:32px;
+color:#78a6f5;
 margin-bottom:15px;
-color:#6f89c9;
 }
 
 p{
-line-height:1.7;
+line-height:1.8;
+color:#555;
 }
 
 button{
 margin-top:20px;
-padding:14px 28px;
+padding:13px 28px;
 border:none;
 border-radius:50px;
-cursor:pointer;
-background:#8db7ff;
+background:#87b6ff;
 color:white;
 font-size:16px;
+cursor:pointer;
 transition:.3s;
 }
 
 button:hover{
 transform:scale(1.05);
-background:#739de7;
 }
 
 input{
-margin-top:20px;
 width:100%;
 padding:14px;
-border-radius:15px;
 border:none;
-outline:none;
-font-size:17px;
+border-radius:15px;
+margin-top:20px;
 text-align:center;
+font-size:16px;
+outline:none;
+}
+
+.menu{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin-top:25px;
+}
+
+.item{
 background:white;
+border-radius:18px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
-#error{
-margin-top:12px;
-color:#ff5f7d;
-font-size:14px;
+.item span{
+font-size:55px;
+display:block;
+margin-bottom:10px;
 }
 
-.fade{
-animation:fade .6s;
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
 }
 
-@keyframes fade{
+.popupCard{
+background:white;
+max-width:700px;
+width:100%;
+padding:30px;
+border-radius:25px;
+max-height:85vh;
+overflow:auto;
+}
+
+#hearts span{
+position:fixed;
+bottom:-40px;
+animation:heart linear infinite;
+opacity:.8;
+}
+
+@keyframes heart{
 from{
+transform:translateY(0);
 opacity:0;
-transform:translateY(20px);
+}
+20%{
+opacity:1;
 }
 to{
-opacity:1;
-transform:translateY(0);
+transform:translateY(-120vh);
+opacity:0;
 }
-}
-
-@media(max-width:480px){
-
-h1{
-font-size:28px;
-}
-
-.card{
-padding:25px;
-}
-
 }
 </style>
 
@@ -129,85 +159,118 @@ padding:25px;
 
 <body>
 
-<div id="intro" class="page fade">
+<div id="hearts"></div>
+
+<div id="home" class="page">
 
 <div class="card">
 
 <h1>Hadiah Dari Bidadari 🤍</h1>
 
 <p>
+
 Haiii sayang...
+
+<br><br>
+
 Aku punya hadiah kecil buat kamu.
-Semoga kamu suka yaa. ✨
+
+Semoga kamu suka yaa ✨
+
 </p>
 
-<button onclick="nextPage()">
+<button onclick="start()">
+
 Buka Hadiah
+
 </button>
 
 </div>
 
 </div>
 
-<div id="passwordPage" class="page hidden fade">
+<div id="login" class="page hidden">
 
 <div class="card">
 
-<h2>Masukkan Password 🔐</h2>
+<h1>🔐</h1>
 
 <input
+id="pass"
 type="password"
-id="password"
-placeholder="Password">
+placeholder="Masukkan Password">
 
-<button onclick="checkPassword()">
+<div id="error" style="color:#ff5b8a;margin-top:10px;"></div>
+
+<button onclick="login()">
+
 Masuk
+
 </button>
 
-<div id="error"></div>
-
 </div>
 
 </div>
 
-<div id="giftPage" class="page hidden fade">
+<div id="gift" class="page hidden">
 
 <div class="card">
 
 <h1>🎁</h1>
 
-<p>
-Password benar!
-Klik kotak hadiah di bawah ini yaa 🤍
-</p>
+<p>Pilih hadiah dari aku 🤍</p>
 
-<button onclick="openGift()">
-Buka Kotak Hadiah
+<div class="menu">
+
+<div class="item">
+
+<span>💌</span>
+
+<button onclick="surat()">
+
+Buka
+
+</button>
+
+</div>
+
+<div class="item">
+
+<span>🎵</span>
+
+<button onclick="lagu()">
+
+Putar
+
 </button>
 
 </div>
 
 </div>
 
+</div>
+
+</div>
+
+<div id="popup"></div>
+
 <script>
 
-function nextPage(){
+function start(){
 
-document.getElementById("intro").classList.add("hidden");
+document.getElementById("home").classList.add("hidden");
 
-document.getElementById("passwordPage").classList.remove("hidden");
+document.getElementById("login").classList.remove("hidden");
 
 }
 
-function checkPassword(){
+function login(){
 
-const pass=document.getElementById("password").value;
+if(document.getElementById("pass").value==="09012007"){
 
-if(pass==="09012007"){
+document.getElementById("login").classList.add("hidden");
 
-document.getElementById("passwordPage").classList.add("hidden");
-
-document.getElementById("giftPage").classList.remove("hidden");
+document.getElementById("gift").classList.remove("hidden");
 
 }else{
 
@@ -217,102 +280,49 @@ document.getElementById("error").innerHTML="Password salah 🤍";
 
 }
 
-function openGift(){
+function lagu(){
 
-document.getElementById("giftPage").innerHTML=`
-
-<h2 style="margin-bottom:25px;color:#6f89c9;">
-Pilih Hadiah Untuk Dibuka 💖
-</h2>
-
-<div style="
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-width:100%;
-max-width:800px;">
-
-<div class="card">
-<div style="font-size:60px;">💌</div>
-<h3>Surat</h3>
-<button onclick="showLetter()">Buka</button>
-</div>
-
-<div class="card">
-<div style="font-size:60px;">🎵</div>
-<h3>Daylight</h3>
-<a href="https://open.spotify.com/search/daylight%20taylor%20swift" target="_blank">
-<button>Dengerin Lagu</button>
-</a>
-</div>
-
-<div class="card">
-<div style="font-size:60px;">🎂</div>
-<h3>Kue</h3>
-<button onclick="showCake()">Lihat</button>
-</div>
-
-</div>
-
-<div id="popup"></div>
-
-`;
+window.open("https://open.spotify.com/search/daylight%20taylor%20swift");
 
 }
 
-function showLetter(){
+function surat(){
 
-document.getElementById("popup").innerHTML=`
+document.getElementById("popup").innerHTML=`<div class="popup">
 
-<div style="
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.45);
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-z-index:999;
-">
+<div class="popupCard">
 
-<div class="card" style="
-max-width:700px;
-max-height:80vh;
-overflow:auto;
-text-align:left;
-">
+<h2 style="text-align:center;color:#78a6f5;">💌 Untuk Kamu</h2>
 
-<h2 style="text-align:center;">💌 Untuk Kamu</h2>
-
-<p style="margin-top:20px;line-height:2;">
+<p style="margin-top:20px;line-height:2;text-align:left;">
 
 Selamat ulang tahun ya, kamu. 🤍
 <br><br>
 
 Jangan kaget dulu, iya ini aku yang biasanya nyebelin, suka gangguin, dan sok tengil tiba-tiba bikin beginian wkwk.
-
 <br><br>
 
 Tapi di balik semua bercandaan itu, aku beneran bersyukur kamu ada. Terima kasih udah jadi seseorang yang nemenin hari-hariku, yang bikin hal sederhana jadi punya cerita.
-
 <br><br>
 
 Di umur kamu yang baru ini, aku cuma berharap semoga hidup lebih baik sama kamu. Semoga kamu selalu dikelilingi hal-hal baik, dilancarkan semua yang kamu usahakan, dan tetap jadi kamu yang aku kenal.
-
 <br><br>
 
 Kalau nanti hari-hari terasa berat, semoga kamu ingat kalau ada seseorang yang selalu percaya sama kamu.
-
 <br><br>
 
-Happy birthday, sayang. Makasih udah lahir dan jadi bagian dari ceritaku. ✨
+Happy birthday, sayang.
+<br><br>
+
+Makasih udah lahir dan jadi bagian dari ceritaku. ✨
 
 </p>
 
-<button onclick="closePopup()">Tutup</button>
+<button onclick="tutup()">
+
+Tutup Surat 🤍
+
+</button>
 
 </div>
 
@@ -322,47 +332,56 @@ Happy birthday, sayang. Makasih udah lahir dan jadi bagian dari ceritaku. ✨
 
 }
 
-function closePopup(){
-function showCake(){
+function tutup(){
 
-document.getElementById("popup").innerHTML=`
-
-<div style="
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.45);
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-z-index:999;
-">
-
-<div class="card" style="text-align:center;">
-
-<div style="font-size:100px;">🎂</div>
-
-<h2>Selamat ulang tahun sayang ❤️</h2>
-
-<p>
-Selamat ulang tahun sayang dan selamat udah jadi om om 🤭
-</p>
-
-<button onclick="closePopup()">Tutup</button>
-
-</div>
-
-</div>
-
-`;
-
-}
 document.getElementById("popup").innerHTML="";
 
-  }
+}
+
+for(let i=0;i<30;i++){
+
+setTimeout(()=>{
+
+buatHati();
+
+},i*250);
+
+}
+
+setInterval(buatHati,700);
+
+function buatHati(){
+
+let hati=document.createElement("span");
+
+hati.innerHTML=Math.random()>0.5?"🤍":"💖";
+
+hati.style.left=Math.random()*100+"vw";
+
+hati.style.fontSize=(18+Math.random()*20)+"px";
+
+hati.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.getElementById("hearts").appendChild(hati);
+
+setTimeout(()=>{
+
+hati.remove();
+
+},10000);
+
+}
+
+document.getElementById("pass").addEventListener("keypress",function(e){
+
+if(e.key==="Enter"){
+
+login();
+
+}
+
+});
+
 </script>
 
 </body>
